@@ -18,6 +18,8 @@ const UI = {
     showAll: "Show all",
     showing: (n, total) => `Showing ${n} of ${total}`,
     noMatch: "No matching radical",
+    smaller: "Smaller text",
+    larger: "Larger text",
   },
   it: {
     subtitle: "e la loro evoluzione storica",
@@ -33,6 +35,8 @@ const UI = {
     showAll: "Mostra tutti",
     showing: (n, total) => `${n} di ${total} visibili`,
     noMatch: "Nessun radicale trovato",
+    smaller: "Testo più piccolo",
+    larger: "Testo più grande",
   },
   fr: {
     subtitle: "et leur évolution historique",
@@ -48,6 +52,8 @@ const UI = {
     showAll: "Tout afficher",
     showing: (n, total) => `${n} sur ${total} affichés`,
     noMatch: "Aucun radical trouvé",
+    smaller: "Texte plus petit",
+    larger: "Texte plus grand",
   },
   ar: {
     subtitle: "وتطوّرها التاريخي",
@@ -63,6 +69,8 @@ const UI = {
     showAll: "عرض الكل",
     showing: (n, total) => `عرض ${n} من ${total}`,
     noMatch: "لا يوجد جذر مطابق",
+    smaller: "تصغير النص",
+    larger: "تكبير النص",
   },
 };
 

@@ -70,6 +70,20 @@ main {
   border-color: var(--ink);
 }
 
+/* Thin vertical line between the language and text-size buttons */
+.langs-sep {
+  width: 1px;
+  align-self: stretch;
+  margin: 2px 6px;
+  background: var(--line);
+}
+
+/* A− / A+ when the limit is reached */
+.langs button:disabled {
+  opacity: 0.35;
+  cursor: default;
+}
+
 .section-title {
   font-family: "Fraunces", serif;
   font-weight: 400;
@@ -159,13 +173,16 @@ main {
    CSS variables defined here override the ones in :root for everything inside .howto */
 .howto {
   --box-w: var(--card-w);  /* card and 好 panel = same width as the grid cards */
+  --guide-min: 280px;      /* the guide on the left never gets narrower than this */
+  /* 280 + 270 + 50 + 270 = 870px: fits even at A+ (130%) inside the 1200px page */
   padding: 8px 16px 36px;
+  overflow-x: auto;        /* very narrow screens: scroll sideways instead of squeezing */
 }
 
 .howto-grid {
   display: grid;
-  /* annotations | card | arrow | 好 panel | empty (keeps the middle centred) */
-  grid-template-columns: 1fr var(--box-w) 70px var(--box-w) 1fr;
+  /* guide (2 shares, at least --guide-min) | card | arrow | 好 panel | spare space (1 share, can shrink to 0) */
+  grid-template-columns: minmax(var(--guide-min), 2fr) var(--box-w) 50px var(--box-w) minmax(0, 1fr);
   grid-template-rows: auto auto;
 }
 
@@ -196,7 +213,7 @@ main {
   list-style: none;
   border: 1px solid transparent; /* same height as the card's border */
   justify-self: end;
-  max-width: 300px;
+  width: min(100%, 360px);
 }
 
 .annotations li {
@@ -268,20 +285,6 @@ main {
   font-size: 12px;
   line-height: 1.4;
   margin: 8px 0 0;
-}
-
-/* On narrow screens: stack everything, hide the arrows */
-@media (max-width: 860px) {
-  .howto-grid {
-    grid-template-columns: var(--box-w);
-    justify-content: center;
-    row-gap: 14px;
-  }
-  .howto-grid > * { grid-column: 1; grid-row: auto; }
-  .annotations { grid-template-rows: none; gap: 6px; justify-self: center; order: 2; }
-  .annotations li { justify-content: center; text-align: center; }
-  .arrow, .connector { display: none; }
-  .hao-card { order: 3; }
 }
 
 /* ---------- Filter ---------- */
