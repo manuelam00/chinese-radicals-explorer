@@ -8,26 +8,6 @@
   --card-pad: 12px;
 }
 
-/* ---------- Background calligraphy (top-right corner) ---------- */
-/* Replace FILE_NAME.jpg with the name of a public-domain file from Wikimedia Commons. */
-/* ?width=1400 asks Commons for a resized copy instead of the full-size original.      */
-body::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: min(60vw, 760px);
-  height: 760px;
-  background: url("https://commons.wikimedia.org/wiki/Special:FilePath/FILE_NAME.jpg?width=1400")
-    top right / cover no-repeat;
-  opacity: 0.16;
-  mix-blend-mode: multiply;                   /* keeps the ink, drops the paper */
-  -webkit-mask-image: linear-gradient(to bottom left, #000 30%, transparent 75%);
-  mask-image: linear-gradient(to bottom left, #000 30%, transparent 75%);
-  pointer-events: none;                       /* never blocks clicks */
-  z-index: 0;
-}
-
 main {
   position: relative;
   z-index: 1;
