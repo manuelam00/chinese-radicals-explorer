@@ -1,0 +1,21 @@
+/* Minimal global reset. All the app's styling lives in App.css. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: #faf8f4;
+  color: #2b2925;
+  font-family: "Noto Serif SC", system-ui, serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  max-width: 1200px;
+  margin: 0 auto;
+}
