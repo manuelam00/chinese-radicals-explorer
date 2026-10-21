@@ -1,6 +1,6 @@
 # 部首 · Chinese Radicals Explorer
 
-An interactive visual explorer of the Chinese radicals (部首, *bùshǒu*), the building blocks used to classify and look up Chinese characters. Pick a radical to see its pinyin, its meaning, the characters built from it, and how its written form changed over time.
+An interactive visual explorer of the Chinese radicals (部首, _bùshǒu_), the building blocks used to classify and look up Chinese characters. Pick a radical to see its pinyin, its meaning, the characters built from it, and how its written form changed over time.
 
 > 🎓 This is a **learning project** I built to practice JavaScript and React for Yan Holtz's D3 + React course. It is meant to be explored and read, not used as a reference dictionary.
 
@@ -10,12 +10,12 @@ An interactive visual explorer of the Chinese radicals (部首, *bùshǒu*), the
 
 - **Browse the radicals.** See the first 100.
 - **Inspect a radical.** View its pinyin and its core meaning.
-- **Explore derived characters.** See which characters contain the radical and how they relate to it.
+- **Explore derived characters.** See which characters contain the radical and how they relate to it. (They’re characters, not compounds (words). e.g. 性, 意, 情 are single characters that contain 心. A compound would be a multi-character word like 意思 or 感情).
 - **See historical forms.** Where available, follow the radical's evolution through earlier scripts (oracle bone, bronze, seal).
 
 ## 🧠 Why this project
 
-Radicals are one of the most useful entry points into Chinese writing. Once you recognise them, unfamiliar characters stop looking like random strokes and start looking like meaningful compositions. I wanted to make that structure *visible*. This dataset also gave me a structure for practising React.
+Radicals are one of the most useful entry points into Chinese writing. Once you recognise them, unfamiliar characters stop looking like random strokes and start looking like meaningful compositions. I wanted to make that structure _visible_. This dataset also gave me a structure for practising React.
 
 Learning goals for me:
 
@@ -25,11 +25,11 @@ Learning goals for me:
 
 ## 🛠️ Tech stack
 
-| Layer | Tools |
-|---|---|
-| Framework | React + Vite |
-| Data pipeline | Node.js build scripts |
-| Data source | [Wiktionary](https://en.wiktionary.org/) |
+| Layer         | Tools                                    |
+| ------------- | ---------------------------------------- |
+| Framework     | React + Vite                             |
+| Data pipeline | Node.js build scripts                    |
+| Data source   | [Wiktionary](https://en.wiktionary.org/) |
 
 ## 📦 How the data works
 
@@ -78,7 +78,6 @@ radicals-explorer/
 ├── .oxlintrc.json     # Linter configuration (oxlint)
 └── package.json
 ```
-
 
 ## 📝 Notes & caveats
 
