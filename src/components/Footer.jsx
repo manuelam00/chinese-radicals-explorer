@@ -39,7 +39,9 @@ export default function Footer() {
             <a href="https://www.react-graph-gallery.com/react-d3-dataviz-course">
               Yan Holtz's D3 ❤️ React course
             </a>
-            . Many thanks to Yan for the course and for the React Graph Gallery.
+            . Many thanks to Yan for the course. For the header, I took
+            inspiration from the new journal{" "}
+            <a href="https://www.feral-worlding.xyz/">'Feral Worlding'</a>.
           </p>
           <p>
             I developed the data pipeline and the components with support from
