@@ -126,7 +126,7 @@ export default function App() {
           <RadicalCard key={r.id} radical={r} lang={lang} />
         ))}
       </div>
-      <Footer />
+      <Footer lang={lang} />
     </main>
   );
 }
