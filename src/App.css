@@ -49,7 +49,6 @@ main {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 22px;
 }
 
 .langs button {
@@ -70,19 +69,81 @@ main {
   border-color: var(--ink);
 }
 
-/* Thin vertical line between the language and text-size buttons */
-.langs-sep {
-  width: 1px;
-  align-self: stretch;
-  margin: 2px 6px;
+/* Two labelled groups under the subtitle: LANGUAGE and TEXT SIZE */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 16px 32px;
+  margin-top: 22px;
+}
+
+.ctrl-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+
+.ctrl-cap {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
+/* Small A− and big A+ inside one pill, same height as the language buttons */
+.size-ctrl {
+  display: inline-flex;
+  align-items: center;
+  height: 30px;
+  padding: 0 3px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+}
+
+.size-ctrl button {
+  display: inline-block;       /* not flex: keeps <sup> raised */
+  height: 24px;
+  padding: 0 10px;
+  font-family: "Fraunces", serif;
+  line-height: 24px;
+  border: none;
+  border-radius: 999px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+
+.size-down { font-size: 13px; }
+.size-up { font-size: 20px; }
+
+.size-ctrl sup {
+  font-size: 0.7em;
+  font-weight: 600;
+  line-height: 0;
+  vertical-align: 0.55em;
+  margin-left: 2px;
+}
+
+.size-ctrl button:hover:not(:disabled) { background: #efebe3; }
+.size-ctrl button:disabled { opacity: 0.3; cursor: default; }
+
+/* Four dots = four size levels; the dark one is the current level */
+.size-dots {
+  display: flex;
+  gap: 5px;
+}
+
+.size-dots i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
   background: var(--line);
 }
 
-/* A− / A+ when the limit is reached */
-.langs button:disabled {
-  opacity: 0.35;
-  cursor: default;
-}
+.size-dots i.on { background: var(--ink); }
 
 .section-title {
   font-family: "Fraunces", serif;

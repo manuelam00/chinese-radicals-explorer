@@ -18,9 +18,12 @@ export default function Footer() {
           </p>
           <p>
             For each radical, the ten derived characters are the most frequent
-            ones in Jun Da's Modern Chinese character frequency list. The
-            historical forms (oracle bone, bronze, Qin slip, ancient, small seal
-            and Liushutong) are images from{" "}
+            ones in{" "}
+            <a href="https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php">
+              Jun Da's Modern Chinese character frequency list
+            </a>
+            . The historical forms (oracle bone, bronze, Qin slip, ancient,
+            small seal and Liushutong) are images from{" "}
             <a href="https://commons.wikimedia.org/">Wikimedia Commons</a>,
             found through the Commons API; their licenses and authors are
             recorded in the dataset. A dashed box means no form was available.

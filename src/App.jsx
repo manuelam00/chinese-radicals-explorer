@@ -15,8 +15,9 @@ const DEFAULT_SIZE = 1;
 // Read the size the visitor chose last time (if the browser allows storage)
 function loadSize() {
   try {
-    const saved = Number(localStorage.getItem("textSize"));
-    return SIZES[saved] ? saved : DEFAULT_SIZE;
+    const raw = localStorage.getItem("textSize"); // null on the first visit
+    const saved = Number(raw);
+    return raw !== null && SIZES[saved] ? saved : DEFAULT_SIZE;
   } catch {
     return DEFAULT_SIZE;
   }
@@ -60,35 +61,56 @@ export default function App() {
           {t(lang).subtitle}
         </p>
 
-        <div className="langs">
-          {LANGS.map((l) => (
-            <button
-              key={l}
-              onClick={() => setLang(l)}
-              className={l === lang ? "active" : ""}
-            >
-              {l.toUpperCase()}
-            </button>
-          ))}
+        <div className="controls">
+          {/* Group 1: language */}
+          <div className="ctrl-group">
+            <span className="ctrl-cap" dir={lang === "ar" ? "rtl" : "ltr"}>
+              {t(lang).language}
+            </span>
+            <div className="langs">
+              {LANGS.map((l) => (
+                <button
+                  key={l}
+                  onClick={() => setLang(l)}
+                  className={l === lang ? "active" : ""}
+                >
+                  {l.toUpperCase()}
+                </button>
+              ))}
+            </div>
+          </div>
 
-          <span className="langs-sep" aria-hidden="true" />
-
-          <button
-            onClick={() => setSize((s) => s - 1)}
-            disabled={!canShrink}
-            aria-label={t(lang).smaller}
-            title={t(lang).smaller}
-          >
-            A−
-          </button>
-          <button
-            onClick={() => setSize((s) => s + 1)}
-            disabled={!canGrow}
-            aria-label={t(lang).larger}
-            title={t(lang).larger}
-          >
-            A+
-          </button>
+          {/* Group 2: text size — small A− / big A+, dots show the current level */}
+          <div className="ctrl-group">
+            <span className="ctrl-cap" dir={lang === "ar" ? "rtl" : "ltr"}>
+              {t(lang).textSize}
+            </span>
+            <div className="size-ctrl">
+              <button
+                className="size-down"
+                onClick={() => setSize((s) => s - 1)}
+                disabled={!canShrink}
+                aria-label={t(lang).smaller}
+                title={t(lang).smaller}
+              >
+                A<sup>−</sup>
+              </button>
+              <button
+                className="size-up"
+                onClick={() => setSize((s) => s + 1)}
+                disabled={!canGrow}
+                aria-label={t(lang).larger}
+                title={t(lang).larger}
+              >
+                A<sup>+</sup>
+              </button>
+            </div>
+            <div className="size-dots" aria-hidden="true">
+              {SIZES.map((_, i) => (
+                <i key={i} className={i === size ? "on" : undefined} />
+              ))}
+            </div>
+          </div>
         </div>
       </header>
       <HowToRead radicals={data.radicals} lang={lang} />
