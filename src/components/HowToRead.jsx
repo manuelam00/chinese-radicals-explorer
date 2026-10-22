@@ -38,12 +38,14 @@ export default function HowToRead({ radicals, lang }) {
 
         <RadicalCard radical={woman} lang={lang} highlight="好" />
 
-        {/* Curved arrow from the circled 好 to the explanation.
-            preserveAspectRatio="none" lets it stretch to the card's height;
+        {/* Curved arrow from the row of characters (bottom-left of the SVG)
+            to the middle of the 好 panel (top-right of the SVG).
+            The CSS places the SVG between those two heights;
+            preserveAspectRatio="none" stretches the curve to fill it;
             vector-effect keeps the line thin while stretching. */}
         <svg className="connector" viewBox="0 0 80 100" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M2 80 C 45 80, 30 50, 76 50" vectorEffect="non-scaling-stroke" />
-          <path d="M68 45 L77 50 L68 55" vectorEffect="non-scaling-stroke" />
+          <path d="M2 100 C 45 100, 30 0, 76 0" vectorEffect="non-scaling-stroke" />
+          <path d="M68 -6 L77 0 L68 6" vectorEffect="non-scaling-stroke" />
         </svg>
 
         <aside className="hao-card">
