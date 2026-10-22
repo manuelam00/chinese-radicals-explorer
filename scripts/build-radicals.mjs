@@ -22,7 +22,7 @@ import path from "node:path";
 
 // ⚠️ Wikimedia asks bots to identify themselves with a contact. Put your email here.
 const USER_AGENT =
-  "RadicalsExplorer/0.1 (personal D3+React learning project; contact: manuelam.mrl@gmail.com)";
+  "RadicalsExplorer/0.1 (personal D3+React learning project; https://github.com/manuelam00/chinese-radicals-explorer)";
 
 // [display, Kangxi radical number(s), base form used for historical images on Commons, English name]
 // Notes:
