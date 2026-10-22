@@ -107,8 +107,6 @@ This app was built in close collaboration with **[Claude](https://claude.ai)**, 
 - **My part:** the idea and scope, the choice of data and what to show, design and interaction decisions, the initial code, testing, reviewing, and iterating on every piece.
 - **Claude's part:** writing and debugging much of the React code, explaining concepts as we went, and advising on the data pipeline (for example, using the Commons API instead of scraping, and the Wikimedia etiquette described above).
 
-This project was a learning exercise. With my current knowledge, I could only have built a much simpler version on my own. Instead, I chose to be guided step by step, so I could aim for a better result while learning how a project's folders and files grow as it develops. At each stage, I focused on understanding why the code is structured the way it is, which made the project a hands-on way to learn the logic behind JavaScript and React.
-
 ## 📜 License & data attribution
 
 - **Unihan data:** © Unicode, Inc., used under the [Unicode License](https://www.unicode.org/license.txt)
@@ -118,6 +116,5 @@ This project was a learning exercise. With my current knowledge, I could only ha
 ## 🙏 Acknowledgements
 
 - **[Yan Holtz's D3 + React course](https://www.react-graph-gallery.com/react-d3-dataviz-course)**, which this project grew out of
-- The journal **[Feral Worlding](https://www.feral-worlding.xyz/)**, which inspired the header design
 - The Unicode Consortium, Jun Da, the Wiktionary editors, and the Wikimedia Commons contributors, whose work makes this dataset possible
-- Claude (Anthropic), my coding collaborator on this project
+- Claude, my coding collaborator on this project
