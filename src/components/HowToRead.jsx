@@ -1,18 +1,21 @@
-import RadicalCard from "./RadicalCard";
+import RadicalCard, { Forms } from "./RadicalCard";
 import { t, nameOf, dirOf } from "../i18n";
 
-// Small hand-drawn-looking arrow pointing right (towards the card)
-function Arrow() {
-  return (
-    <svg className="arrow" viewBox="0 0 60 20" width="44" height="15" aria-hidden="true">
-      <path d="M2 14 C 20 2, 38 2, 54 10" />
-      <path d="M46 4 L55 10 L45 15" />
-    </svg>
-  );
-}
-
 // Commons "Special:FilePath" redirects to the real image file
-const HAO_ORACLE = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent("好-oracle.svg")}`;
+const commons = (file) => ({
+  url: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(file)}`,
+});
+
+// The forms listed in Wiktionary's "Historical forms of the character 好" table.
+// There is no slip or ancient form, so those two cells show the dashed box.
+const HAO_FORMS = {
+  oracle: commons("好-oracle.svg"),
+  bronze: commons("好-bronze.svg"),
+  slip: null,
+  ancient: null,
+  seal: commons("好-seal.svg"),
+  liushutong: commons("好-bigseal.svg"),
+};
 
 export default function HowToRead({ radicals, lang }) {
   const woman = radicals.find((r) => r.id === 38); // 女
@@ -28,47 +31,45 @@ export default function HowToRead({ radicals, lang }) {
       <div className="howto-grid">
         <h2 className="howto-title" dir={dir}>{tx.howTitle}</h2>
 
-        {/* Annotations: same row heights as the card, so each sits next to its row */}
+        {/* Annotations: same row heights as the card, so each sits next to its row.
+            The thin line after each label is drawn in CSS (.annotations li::after) */}
         <ol className="annotations">
-          <li><span dir={dir}>{tx.annChar}</span><Arrow /></li>
-          <li><span dir={dir}>{tx.annLabel}</span><Arrow /></li>
-          <li><span dir={dir}>{tx.annForms}</span><Arrow /></li>
-          <li><span dir={dir}>{tx.annDerived}</span><Arrow /></li>
+          <li><span dir={dir}>{tx.annChar}</span></li>
+          <li><span dir={dir}>{tx.annLabel}</span></li>
+          <li><span dir={dir}>{tx.annForms}</span></li>
+          <li><span dir={dir}>{tx.annDerived}</span></li>
         </ol>
 
         <RadicalCard radical={woman} lang={lang} highlight="好" />
 
-        {/* Curved arrow from the row of characters (bottom-left of the SVG)
-            to the middle of the 好 panel (top-right of the SVG).
-            The CSS places the SVG between those two heights;
-            preserveAspectRatio="none" stretches the curve to fill it;
-            vector-effect keeps the line thin while stretching. */}
-        <svg className="connector" viewBox="0 0 80 100" preserveAspectRatio="none" aria-hidden="true">
-          <path d="M2 100 C 45 100, 30 0, 76 0" vectorEffect="non-scaling-stroke" />
-          <path d="M68 -6 L77 0 L68 6" vectorEffect="non-scaling-stroke" />
-        </svg>
+        {/* Right-angle connector from the row of characters (bottom left)
+            to the big 好 (top right): across, up, across. Drawn in CSS. */}
+        <div className="connector" aria-hidden="true">
+          <i className="connector-head" />
+        </div>
 
+        {/* Same 4 rows as the 女 card, so each row lines up with its neighbor:
+            1 character · 2 pinyin and meaning · 3 historical forms · 4 formula + note */}
         <aside className="hao-card">
-          <img
-            src={HAO_ORACLE}
-            alt="好 oracle bone form"
-            className="hao-oracle"
-            onError={(e) => (e.currentTarget.style.display = "none")}
-          />
           <div className="hao-char">好</div>
+
           <div className="hao-pinyin">
             hǎo · <span dir={dir}>{tx.good}</span>
           </div>
 
-          <div className="hao-formula">
-            <span><b>女</b><small dir={dir}>{nameOf(woman, lang)}</small></span>
-            <em>+</em>
-            <span><b>子</b><small dir={dir}>{nameOf(child, lang)}</small></span>
-            <em>=</em>
-            <span><b className="seal">好</b><small dir={dir}>{tx.good}</small></span>
-          </div>
+          <Forms forms={HAO_FORMS} char="好" />
 
-          <p dir={dir}>{tx.haoText}</p>
+          <div className="hao-bottom">
+            <div className="hao-formula">
+              <span><b>女</b><small dir={dir}>{nameOf(woman, lang)}</small></span>
+              <em>+</em>
+              <span><b>子</b><small dir={dir}>{nameOf(child, lang)}</small></span>
+              <em>=</em>
+              <span><b className="seal">好</b><small dir={dir}>{tx.good}</small></span>
+            </div>
+
+            <p dir={dir}>{tx.haoText}</p>
+          </div>
         </aside>
       </div>
     </section>

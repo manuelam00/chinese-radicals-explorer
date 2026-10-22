@@ -117,7 +117,7 @@ main {
 }
 
 .size-down { font-size: 13px; }
-.size-up { font-size: 20px; }
+.size-up { font-size: 14px; } /* same size as the language buttons */
 
 .size-ctrl sup {
   font-size: 0.7em;
@@ -240,7 +240,6 @@ main {
    CSS variables defined here override the ones in :root for everything inside .howto */
 .howto {
   --box-w: var(--card-w);  /* example card = same width as the grid cards */
-  --hao-max: 360px;        /* the 好 panel grows up to this width when there is room */
   --row-mid: 25px;         /* distance from the card's bottom edge to the middle of the character row */
   --guide-min: 280px;      /* the guide on the left never gets narrower than this */
   /* 280 + 270 + 50 + 270 = 870px: fits even at A+ (130%) inside the 1200px page */
@@ -250,8 +249,8 @@ main {
 
 .howto-grid {
   display: grid;
-  /* guide (2 shares, at least --guide-min) | card | arrow | 好 panel (card width up to --hao-max) | spare space (1 share, can shrink to 0) */
-  grid-template-columns: minmax(var(--guide-min), 2fr) var(--box-w) 50px minmax(var(--box-w), var(--hao-max)) minmax(0, 1fr);
+  /* guide (2 shares, at least --guide-min) | card | connector | 好 panel (same width as the card) | spare space (1 share, can shrink to 0) */
+  grid-template-columns: minmax(var(--guide-min), 2fr) var(--box-w) 50px var(--box-w) minmax(0, 1fr);
   grid-template-rows: auto auto;
 }
 
@@ -268,7 +267,7 @@ main {
 }
 
 /* In the example card, keep the character row at the bottom,
-   so the arrow (anchored --row-mid above the bottom) always starts on it */
+   so the connector (anchored --row-mid above the bottom) always starts on it */
 .howto .derived { align-content: flex-end; }
 
 /* Row 2: everything else, side by side */
@@ -293,61 +292,112 @@ main {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: 6px;
+  gap: 10px;
   font-size: 12px;
   line-height: 1.35;
   text-align: right;
   opacity: 0.8;
 }
 
-.annotations li:last-child {
-  align-items: flex-start;
-  padding-top: 4px;
-}
-
-.arrow,
-.connector {
+/* A thin, pale straight line after each label, pointing at its row of the card */
+.annotations li::after {
+  content: "";
   flex-shrink: 0;
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+  width: 32px;
+  border-top: 1px solid var(--ink);
+  opacity: 0.35;
 }
 
+/* The last label sits at the bottom, beside the row of characters:
+   its last text line and its line are both centred --row-mid above the card's bottom edge */
+.annotations li:last-child {
+  align-items: flex-end;
+  padding-bottom: calc(var(--row-mid) - var(--card-pad) - 8px);
+}
+.annotations li:last-child::after {
+  margin-bottom: 8px; /* half a text line, so the line meets the middle of the last text line */
+}
+
+/* Right-angle connector in the gap between the two boxes.
+   Its box runs from the middle of the 好 row (top) to the middle of the
+   character row (bottom); the left half draws ─┘ and the right half draws ─ */
 .connector {
-  /* From the character row (--row-mid above the bottom) up to half the card's height */
-  align-self: end;
-  width: 100%;
-  height: calc(50% - var(--row-mid));
-  margin-bottom: var(--row-mid);
-  overflow: visible;       /* the arrowhead may poke slightly outside the box */
-  stroke: var(--seal);
-  stroke-width: 1.4;
+  --hao-mid: calc(1px + var(--card-pad) + 32px); /* border + padding + half of the 64px character row */
+  position: relative;
+  align-self: stretch;
+  margin: var(--hao-mid) 0 var(--row-mid);
+  color: var(--seal);
 }
 
-/* Same width as the card (column), same height as the card (stretch) */
+.connector::before,
+.connector::after {
+  content: "";
+  position: absolute;
+  border: 0 solid currentColor;
+}
+
+/* bottom-left: across from the card, then up */
+.connector::before {
+  left: 0;
+  width: 50%;
+  top: 0;
+  bottom: 0;
+  border-bottom-width: 1px;
+  border-right-width: 1px;
+}
+
+/* top-right: across to the 好 box */
+.connector::after {
+  left: 50%;
+  right: 0;
+  top: 0;
+  border-top-width: 1px;
+}
+
+/* small arrowhead touching the 好 box */
+.connector-head {
+  position: absolute;
+  right: 1px;
+  top: -3.5px;
+  width: 7px;
+  height: 7px;
+  border-top: 1px solid currentColor;
+  border-right: 1px solid currentColor;
+  transform: rotate(45deg);
+}
+
+/* Same width as the card (column), same height (stretch), and the SAME 4 rows
+   (--card-rows, --card-pad), so 好 sits next to 女, hǎo next to nǚ, and so on */
 .hao-card {
   align-self: stretch;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 10px;
+  display: grid;
+  grid-template-rows: var(--card-rows);
+  padding: var(--card-pad);
   text-align: center;
   border: 1px solid var(--seal);
   background: rgba(250, 248, 244, 0.9);
 }
 
-.hao-oracle { width: 28px; height: 28px; opacity: 0.8; }
-.hao-char { font-size: 42px; line-height: 1.1; color: var(--seal); }
-.hao-pinyin { font-size: 12px; margin: 2px 0 8px; }
+/* Rows 1 and 2: same sizes as .char and .label in the card */
+.hao-char { font-size: 46px; line-height: 64px; color: var(--seal); }
+.hao-pinyin { font-size: 14px; opacity: 0.8; }
+
+/* Row 3 uses the card's own .forms row, so it needs no extra styles */
+
+/* Row 4: formula on the left, short note on the right */
+.hao-bottom {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 6px;
+}
 
 .hao-formula {
   display: flex;
+  flex-shrink: 0;
   justify-content: center;
   align-items: flex-start;
-  gap: 6px;
+  gap: 4px;
 }
 .hao-formula span { display: flex; flex-direction: column; align-items: center; }
 .hao-formula b { font-size: 20px; font-weight: 400; }
@@ -355,13 +405,14 @@ main {
 .hao-formula small { font-size: 10px; opacity: 0.7; }
 .hao-formula em { font-style: normal; font-size: 15px; opacity: 0.5; line-height: 28px; }
 
-.hao-card p {
+.hao-bottom p {
   font-family: "Fraunces", serif;
   font-style: italic;
   font-weight: 300;
-  font-size: 12px;
-  line-height: 1.4;
-  margin: 8px 0 0;
+  font-size: 11px;
+  line-height: 1.35;
+  text-align: start;   /* left in EN/IT/FR, right in Arabic */
+  margin: 0;
 }
 
 /* ---------- Filter ---------- */
@@ -521,6 +572,26 @@ main {
 }
 
 .footer a:hover {
+  color: var(--seal);
+  border-color: var(--seal);
+}
+
+/* One centred line below the coloured footer, on the page background */
+.footer-credit {
+  margin: 0;
+  padding: 20px 24px 28px;
+  font-size: 12px;
+  text-align: center;
+  opacity: 0.7;
+}
+
+.footer-credit a {
+  color: var(--ink);
+  text-decoration: none;
+  border-bottom: 1px solid var(--ink);
+}
+
+.footer-credit a:hover {
   color: var(--seal);
   border-color: var(--seal);
 }

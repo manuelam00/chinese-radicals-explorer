@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { nameOf, dirOf } from "../i18n";
 
 const ERAS = [
@@ -8,6 +9,33 @@ const ERAS = [
   { key: "seal", label: "Seal" },
   { key: "liushutong", label: "LST" },
 ];
+
+// One cell of the forms row. If the image can't load, it shows the dashed box instead.
+function FormCell({ form, label, char }) {
+  const [broken, setBroken] = useState(false);
+  return (
+    <div className="form" title={label}>
+      {form && !broken ? (
+        <img src={form.url} alt={`${char} ${label}`} onError={() => setBroken(true)} />
+      ) : (
+        <span className="empty" />
+      )}
+      <small>{label}</small>
+    </div>
+  );
+}
+
+// The row of six historical forms. Exported so the 好 box in "How to read" can reuse it.
+//   forms – { oracle, bronze, slip, ancient, seal, liushutong }, each { url } or null
+export function Forms({ forms, char }) {
+  return (
+    <div className="forms">
+      {ERAS.map(({ key, label }) => (
+        <FormCell key={key} form={forms[key]} label={label} char={char} />
+      ))}
+    </div>
+  );
+}
 
 // One card. Props:
 //   radical   – one object from radicals.json
@@ -22,17 +50,7 @@ export default function RadicalCard({ radical, lang, highlight }) {
         {radical.pinyin} · <span dir={dirOf(lang)}>{nameOf(radical, lang)}</span>
       </div>
 
-      <div className="forms">
-        {ERAS.map(({ key, label }) => {
-          const f = radical.forms[key];
-          return (
-            <div key={key} className="form" title={label}>
-              {f ? <img src={f.url} alt={`${radical.char} ${label}`} /> : <span className="empty" />}
-              <small>{label}</small>
-            </div>
-          );
-        })}
-      </div>
+      <Forms forms={radical.forms} char={radical.char} />
 
       <div className="derived">
         {radical.derived.map((d) => (
