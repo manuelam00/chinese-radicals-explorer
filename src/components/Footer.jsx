@@ -29,8 +29,8 @@ export default function Footer() {
             recorded in the dataset. A dashed box means no form was available.
           </p>
           <p>
-            The Italian, French and Arabic radical names were drafted with the
-            help of Claude and are not taken from a dictionary.
+            The Italian, French, and Arabic radical names were generated with
+            Claude rather than taken from a dictionary.
           </p>
         </div>
 
