@@ -271,10 +271,7 @@ main {
 .howto-title {
   grid-column: 2;
   grid-row: 1;
-  font-family: "Fraunces", serif;
   font-weight: 400;
-  font-size: 15px;
-  letter-spacing: 0.02em;
   text-align: center;
   margin: 0 0 8px;
 }

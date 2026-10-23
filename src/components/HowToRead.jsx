@@ -29,15 +29,25 @@ export default function HowToRead({ radicals, lang }) {
     <section className="howto">
       {/* The grid has 2 rows: row 1 = title (above the card only), row 2 = everything else */}
       <div className="howto-grid">
-        <h2 className="howto-title" dir={dir}>{tx.howTitle}</h2>
+        <h2 className="howto-title ctrl-cap" dir={dir}>
+          {tx.howTitle}
+        </h2>
 
         {/* Annotations: same row heights as the card, so each sits next to its row.
             The thin line after each label is drawn in CSS (.annotations li::after) */}
         <ol className="annotations">
-          <li><span dir={dir}>{tx.annChar}</span></li>
-          <li><span dir={dir}>{tx.annLabel}</span></li>
-          <li><span dir={dir}>{tx.annForms}</span></li>
-          <li><span dir={dir}>{tx.annDerived}</span></li>
+          <li>
+            <span dir={dir}>{tx.annChar}</span>
+          </li>
+          <li>
+            <span dir={dir}>{tx.annLabel}</span>
+          </li>
+          <li>
+            <span dir={dir}>{tx.annForms}</span>
+          </li>
+          <li>
+            <span dir={dir}>{tx.annDerived}</span>
+          </li>
         </ol>
 
         <RadicalCard radical={woman} lang={lang} highlight="好" />
@@ -61,11 +71,20 @@ export default function HowToRead({ radicals, lang }) {
 
           <div className="hao-bottom">
             <div className="hao-formula">
-              <span><b>女</b><small dir={dir}>{nameOf(woman, lang)}</small></span>
+              <span>
+                <b>女</b>
+                <small dir={dir}>{nameOf(woman, lang)}</small>
+              </span>
               <em>+</em>
-              <span><b>子</b><small dir={dir}>{nameOf(child, lang)}</small></span>
+              <span>
+                <b>子</b>
+                <small dir={dir}>{nameOf(child, lang)}</small>
+              </span>
               <em>=</em>
-              <span><b className="seal">好</b><small dir={dir}>{tx.good}</small></span>
+              <span>
+                <b className="seal">好</b>
+                <small dir={dir}>{tx.good}</small>
+              </span>
             </div>
 
             <p dir={dir}>{tx.haoText}</p>
