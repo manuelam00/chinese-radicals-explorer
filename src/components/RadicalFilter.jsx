@@ -56,14 +56,17 @@ export default function RadicalFilter({ radicals, lang, selected, onChange, visi
 
   return (
     <section className="filter">
-      <div className="filter-head">
-        <h2 className="section-title" dir={dir}>{tx.filterTitle}</h2>
+      {/* Numbered section heading; the hover tip sits on the right of the same line */}
+      <div className="sec-head">
+        <span className="sec-num">02</span>
+        <h2 className="sec-title" dir={dir}>{tx.filterTitle}</h2>
         <span className="filter-count" dir={dir}>{tx.showing(visibleCount, radicals.length)}</span>
         {selected.length > 0 && (
           <button className="filter-clear" onClick={() => onChange([])}>
             {tx.showAll}
           </button>
         )}
+        <span className="sec-note" dir={dir}>{tx.hoverHint}</span>
       </div>
 
       <div className="search-wrap">

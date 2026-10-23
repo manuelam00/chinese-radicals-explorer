@@ -5,7 +5,8 @@ export const LANGS = ["en", "it", "fr", "ar"];
 
 const UI = {
   en: {
-    subtitle: "and their historical evolution",
+    kicker: "An interactive explorer",
+    subtitle: "and their historical evolution, from oracle bones to brush",
     howTitle: "How to read a card",
     annChar: "The radical, as it is written today",
     annLabel: "Pronunciation (pinyin) and meaning",
@@ -15,7 +16,7 @@ const UI = {
     good: "good",
     haoText:
       "A popular folk etymology. Research on early script suggests more complex origins.",
-    filterTitle: "Filter radicals",
+    filterTitle: "Explore the radicals",
     search: "Search a meaning…",
     showAll: "Show all",
     showing: (n, total) => `Showing ${n} of ${total}`,
@@ -29,7 +30,8 @@ const UI = {
     larger: "Larger text",
   },
   it: {
-    subtitle: "e la loro evoluzione storica",
+    kicker: "Un esploratore interattivo",
+    subtitle: "e la loro evoluzione storica, dalle ossa oracolari al pennello",
     howTitle: "Come leggere una scheda",
     annChar: "Il radicale, come si scrive oggi",
     annLabel: "Pronuncia (pinyin) e significato",
@@ -39,7 +41,7 @@ const UI = {
     good: "buono",
     haoText:
       "Un'etimologia popolare. La ricerca sulle scritture antiche suggerisce origini più complesse.",
-    filterTitle: "Filtra i radicali",
+    filterTitle: "Esplora i radicali",
     search: "Cerca un significato…",
     showAll: "Mostra tutti",
     showing: (n, total) => `${n} di ${total} visibili`,
@@ -53,7 +55,8 @@ const UI = {
     larger: "Testo più grande",
   },
   fr: {
-    subtitle: "et leur évolution historique",
+    kicker: "Un explorateur interactif",
+    subtitle: "et leur évolution historique, des os oraculaires au pinceau",
     howTitle: "Comment lire une fiche",
     annChar: "Le radical, tel qu'on l'écrit aujourd'hui",
     annLabel: "Prononciation (pinyin) et sens",
@@ -63,7 +66,7 @@ const UI = {
     good: "bon",
     haoText:
       "Une étymologie populaire. Les recherches sur les écritures anciennes suggèrent des origines plus complexes.",
-    filterTitle: "Filtrer les radicaux",
+    filterTitle: "Explorer les radicaux",
     search: "Chercher un sens…",
     showAll: "Tout afficher",
     showing: (n, total) => `${n} sur ${total} affichés`,
@@ -77,7 +80,8 @@ const UI = {
     larger: "Texte plus grand",
   },
   ar: {
-    subtitle: "وتطوّرها التاريخي",
+    kicker: "مستكشف تفاعلي",
+    subtitle: "وتطوّرها التاريخي، من عظام العرافة إلى الفرشاة",
     howTitle: "كيف تقرأ البطاقة",
     annChar: "الجذر كما يُكتب اليوم",
     annLabel: "النطق (بينيين) والمعنى",
@@ -86,7 +90,7 @@ const UI = {
     annDerived: "أكثر 10 أحرف شيوعًا مبنية على هذا الجذر",
     good: "جيّد",
     haoText: "تأصيل شعبي. وتشير أبحاث الخطوط القديمة إلى أصول أكثر تعقيدًا.",
-    filterTitle: "تصفية الجذور",
+    filterTitle: "استكشف الجذور",
     search: "ابحث عن معنى…",
     showAll: "عرض الكل",
     showing: (n, total) => `عرض ${n} من ${total}`,

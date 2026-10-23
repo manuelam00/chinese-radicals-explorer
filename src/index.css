@@ -16,6 +16,6 @@ body {
 }
 
 #root {
-  max-width: 1200px;
+  max-width: 1340px; /* wide enough for 4 cards + the 48px edges */
   margin: 0 auto;
 }

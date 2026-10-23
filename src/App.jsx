@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import data from "./data/radicals.json";
+// Importing the image (instead of only naming it in the CSS) makes Vite check that the file
+// exists, add it to the build, and give us its correct address, also on GitHub Pages
+import huaisu from "./assets/huaisu-colophon.webp";
 import { LANGS, t } from "./i18n";
 import RadicalCard from "./components/RadicalCard";
 import HowToRead from "./components/HowToRead";
@@ -48,88 +51,94 @@ export default function App() {
   const canShrink = size > 0;
   const canGrow = size < SIZES.length - 1;
 
-  return (
-    // `zoom` scales text, images and spacing together, and the layout re-flows
-    <main style={{ zoom: SIZES[size] }}>
-      <header className="hero">
-        <h1>
-          The first 100
-          <br />
-          Chinese radicals
-        </h1>
-        <p className="subtitle" dir={lang === "ar" ? "rtl" : "ltr"}>
-          {t(lang).subtitle}
-        </p>
+  const tx = t(lang);
+  const dir = lang === "ar" ? "rtl" : "ltr";
 
-        <div className="controls">
-          {/* Group 1: language */}
-          <div className="ctrl-group">
-            <span className="ctrl-cap" dir={lang === "ar" ? "rtl" : "ltr"}>
-              {t(lang).language}
-            </span>
-            <div className="langs">
-              {LANGS.map((l) => (
-                <button
-                  key={l}
-                  onClick={() => setLang(l)}
-                  className={l === lang ? "active" : ""}
-                >
-                  {l.toUpperCase()}
-                </button>
-              ))}
-            </div>
+  return (
+    <>
+      {/* Faded calligraphy behind the header. It sits OUTSIDE <main>, so it isn't
+          zoomed by A+/A− and can reach the right edge of the window on wide screens. */}
+      <div
+        className="hero-bg"
+        aria-hidden="true"
+        style={{ backgroundImage: `url(${huaisu})` }}
+      />
+
+      {/* `zoom` scales text, images and spacing together, and the layout re-flows */}
+      <main style={{ zoom: SIZES[size] }}>
+        {/* Top bar: both controls on one line, each with its caption */}
+        <div className="topbar">
+          <span className="ctrl-cap" dir={dir}>
+            {tx.language}
+          </span>
+          <div className="langs">
+            {LANGS.map((l) => (
+              <button
+                key={l}
+                onClick={() => setLang(l)}
+                className={l === lang ? "active" : ""}
+              >
+                {l.toUpperCase()}
+              </button>
+            ))}
           </div>
 
-          {/* Group 2: text size — small A− / big A+, dots show the current level */}
-          <div className="ctrl-group">
-            <span className="ctrl-cap" dir={lang === "ar" ? "rtl" : "ltr"}>
-              {t(lang).textSize}
-            </span>
-            <div className="size-ctrl">
-              <button
-                className="size-down"
-                onClick={() => setSize((s) => s - 1)}
-                disabled={!canShrink}
-                aria-label={t(lang).smaller}
-                title={t(lang).smaller}
-              >
-                A<sup>−</sup>
-              </button>
-              <button
-                className="size-up"
-                onClick={() => setSize((s) => s + 1)}
-                disabled={!canGrow}
-                aria-label={t(lang).larger}
-                title={t(lang).larger}
-              >
-                A<sup>+</sup>
-              </button>
-            </div>
-            <div className="size-dots" aria-hidden="true">
-              {SIZES.map((_, i) => (
-                <i key={i} className={i === size ? "on" : undefined} />
-              ))}
-            </div>
+          <span className="topbar-sep" aria-hidden="true" />
+
+          <span className="ctrl-cap" dir={dir}>
+            {tx.textSize}
+          </span>
+          <div className="size-ctrl">
+            <button
+              className="size-down"
+              onClick={() => setSize((s) => s - 1)}
+              disabled={!canShrink}
+              aria-label={tx.smaller}
+              title={tx.smaller}
+            >
+              A<sup>−</sup>
+            </button>
+            <button
+              className="size-up"
+              onClick={() => setSize((s) => s + 1)}
+              disabled={!canGrow}
+              aria-label={tx.larger}
+              title={tx.larger}
+            >
+              A<sup>+</sup>
+            </button>
           </div>
         </div>
-      </header>
-      <HowToRead radicals={data.radicals} lang={lang} />
-      <RadicalFilter
-        radicals={data.radicals}
-        lang={lang}
-        selected={selected}
-        onChange={setSelected}
-        visibleCount={visible.length}
-      />
-      <p className="grid-hint" dir={lang === "ar" ? "rtl" : "ltr"}>
-        {t(lang).hoverHint}
-      </p>
-      <div className="grid">
-        {visible.map((r) => (
-          <RadicalCard key={r.id} radical={r} lang={lang} />
-        ))}
-      </div>
-      <Footer lang={lang} />
-    </main>
+
+        <header className="hero">
+          <p className="kicker">
+            部首 · <span dir={dir}>{tx.kicker}</span>
+          </p>
+          <h1>
+            The first 100
+            <br />
+            Chinese radicals
+          </h1>
+          <p className="subtitle" dir={dir}>
+            {tx.subtitle}
+          </p>
+        </header>
+
+        <HowToRead radicals={data.radicals} lang={lang} />
+        <RadicalFilter
+          radicals={data.radicals}
+          lang={lang}
+          selected={selected}
+          onChange={setSelected}
+          visibleCount={visible.length}
+        />
+        <div className="grid">
+          {visible.map((r) => (
+            <RadicalCard key={r.id} radical={r} lang={lang} />
+          ))}
+        </div>
+        <Footer lang={lang} />
+      </main>
+    </>
   );
 }

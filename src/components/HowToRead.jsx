@@ -27,11 +27,16 @@ export default function HowToRead({ radicals, lang }) {
 
   return (
     <section className="howto">
-      {/* The grid has 2 rows: row 1 = title (above the card only), row 2 = everything else */}
-      <div className="howto-grid">
-        <h2 className="howto-title ctrl-cap" dir={dir}>
+      {/* Numbered section heading, same style as "02 Explore the radicals" */}
+      <div className="sec-head">
+        <span className="sec-num">01</span>
+        <h2 className="sec-title" dir={dir}>
           {tx.howTitle}
         </h2>
+      </div>
+
+      {/* One row: guide | example card | connector | 好 box */}
+      <div className="howto-grid">
 
         {/* Annotations: same row heights as the card, so each sits next to its row.
             The thin line after each label is drawn in CSS (.annotations li::after) */}

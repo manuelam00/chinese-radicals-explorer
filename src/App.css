@@ -7,6 +7,20 @@
   --card-rows: 64px 40px 60px auto;
   --card-pad: 12px;
   --card-w: 270px; /* ONE card width, used by the grid AND the How-to section */
+  --grid-gap: 12px; /* space between the cards in the grid */
+  --edge: 48px; /* THE left edge: every section starts this far from the side of the page */
+  /* THE right edge: every section is as wide as 4 cards + 3 gaps = 1116px */
+  --content-w: calc(4 * var(--card-w) + 3 * var(--grid-gap));
+}
+
+/* Every section: content starts at --edge and ends after --content-w,
+   so the rules, the tip, the pills, the How-to row and the cards all end on the same line */
+.topbar,
+.hero,
+.howto,
+.filter,
+.grid {
+  max-width: calc(var(--content-w) + 2 * var(--edge));
 }
 
 main {
@@ -17,42 +31,102 @@ main {
 
 /* ---------- Header ---------- */
 
+/* Faded calligraphy behind the header, across the top of the window.
+   The image is a crop of the Song-dynasty colophons on Huaisu's "Autobiography" scroll
+   (see the credit line at the bottom of the page), with the paper and the red seals
+   removed: it contains only the ink, so it needs no filter and blends into any background. */
+.hero-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0; /* full window width (without causing a sideways scrollbar) */
+  height: min(80vh, 720px); /* 1.5× the scan's real height (480px): still sharp */
+  /* the image itself is set in App.jsx (imported, so Vite always finds it) */
+  background-position: right top;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  opacity: 0.2; /* raise for a stronger background, lower for a fainter one */
+  /* fade out towards the title (left) and towards the content (bottom) */
+  -webkit-mask-image: linear-gradient(to left, #000 35%, transparent 66%),
+    linear-gradient(to bottom, #000 60%, transparent);
+  -webkit-mask-composite: source-in;
+  mask-image: linear-gradient(to left, #000 35%, transparent 66%),
+    linear-gradient(to bottom, #000 60%, transparent);
+  mask-composite: intersect;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Top bar: LANGUAGE  EN IT FR AR  |  TEXT SIZE  A− A+ */
+.topbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 12px;
+  padding: 26px var(--edge) 0;
+}
+
+.topbar-sep {
+  width: 1px;
+  height: 22px;
+  margin: 0 10px;
+  background: var(--line);
+}
+
+.ctrl-cap {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+
 .hero {
-  padding: clamp(56px, 9vw, 112px) 24px 28px; /* more white space above the title */
-  text-align: center;
+  /* tall header: fills most of the first screen, title vertically centred in it */
+  min-height: min(82vh, 820px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px var(--edge) 72px;
+}
+
+/* Small red line above the title */
+.kicker {
+  margin: 0 0 22px;
+  font-size: 11px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--seal);
 }
 
 .hero h1 {
-  font-family: "Fraunces", "Noto Serif SC", serif;
-  font-weight: 300;
-  font-size: clamp(44px, 7.5vw, 108px);
-  line-height: 0.9;
-  letter-spacing: -0.04em;
+  max-width: 700px; /* "Chinese" and "radicals" on separate lines: three lines, like a poster */
+  font-family: "Tinos", "Noto Serif SC", serif;
+  font-weight: 400; /* Tinos has no light weight */
+  font-size: clamp(56px, 11vw, 150px);
+  line-height: 0.86;
+  letter-spacing: -0.045em;
   margin: 0;
 }
 
-.hero .blur {
-  filter: blur(3px);
-}
-
 .subtitle {
-  font-family: "Fraunces", serif;
+  width: fit-content; /* the box is as wide as its text, so it always starts on the left edge (Arabic too) */
+  max-width: 640px;
+  font-family: "Tinos", serif;
   font-style: normal;
-  font-weight: 300; /* light, now that the real italic is loaded */
-  font-size: clamp(16px, 1.8vw, 20px);
+  font-weight: 300;
+  font-size: clamp(17px, 1.9vw, 24px);
   letter-spacing: 0.01em;
   opacity: 0.65;
-  margin: 18px 0 0;
+  margin: 28px 0 0;
 }
 
 .langs {
   display: flex;
-  justify-content: center;
   gap: 8px;
 }
 
 .langs button {
-  font-family: "Fraunces", serif;
+  font-family: "Tinos", serif;
   font-size: 14px;
   letter-spacing: 0.08em;
   padding: 6px 14px;
@@ -69,30 +143,6 @@ main {
   border-color: var(--ink);
 }
 
-/* Two labelled groups under the subtitle: LANGUAGE and TEXT SIZE */
-.controls {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  flex-wrap: wrap;
-  gap: 16px 32px;
-  margin-top: 22px;
-}
-
-.ctrl-group {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 6px;
-}
-
-.ctrl-cap {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  opacity: 0.55;
-}
-
 /* Small A− and big A+ inside one pill, same height as the language buttons */
 .size-ctrl {
   display: inline-flex;
@@ -107,7 +157,7 @@ main {
   display: inline-block; /* not flex: keeps <sup> raised */
   height: 24px;
   padding: 0 10px;
-  font-family: "Fraunces", serif;
+  font-family: "Tinos", serif;
   line-height: 24px;
   border: none;
   border-radius: 999px;
@@ -139,39 +189,51 @@ main {
   cursor: default;
 }
 
-/* Four dots = four size levels; the dark one is the current level */
-.size-dots {
+/* ---------- Section headings: thin rule, red number, serif title ---------- */
+
+.sec-head {
   display: flex;
-  gap: 5px;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin: 0 0 24px;
+  padding-top: 22px;
+  border-top: 1px solid var(--line);
 }
 
-.size-dots i {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: var(--line);
+.sec-num {
+  font-family: "Tinos", serif;
+  font-size: 13px;
+  color: var(--seal);
 }
 
-.size-dots i.on {
-  background: var(--ink);
-}
-
-.section-title {
-  font-family: "Fraunces", serif;
+.sec-title {
+  font-family: "Tinos", serif;
   font-weight: 400;
-  font-size: 26px;
+  font-size: 30px;
   letter-spacing: -0.01em;
   margin: 0;
+}
+
+/* Short note on the right end of the heading line (the hover tip) */
+.sec-note {
+  margin-left: auto;
+  font-family: "Tinos", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+  opacity: 0.6;
 }
 
 /* ---------- Card ---------- */
 
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, var(--card-w)); /* fixed width */
-  justify-content: center; /* centre the leftover space */
-  gap: 12px;
-  padding: 16px;
+  /* as many 270px columns as fit; they stretch slightly so the row always fills the width
+     (at full width there are exactly 4 columns of exactly 270px) */
+  grid-template-columns: repeat(auto-fill, minmax(var(--card-w), 1fr));
+  gap: var(--grid-gap);
+  padding: 22px var(--edge) 0;
 }
 
 .card {
@@ -261,38 +323,26 @@ main {
 /* A smaller version of the card, only inside this section:
    CSS variables defined here override the ones in :root for everything inside .howto */
 .howto {
-  --box-w: 340px; /* the two boxes are wider than the grid cards, so the 好 note fits beside the formula */
+  --box-w: 336px; /* the two boxes are wider than the grid cards, so the 好 note fits beside the formula */
   /* Same rows as the grid cards, but the last row is at least 80px tall:
      enough for the note in every language, even at A+, so both boxes keep the same height */
   --card-rows: 64px 40px 60px minmax(80px, auto);
   --row-mid: 25px; /* distance from the card's bottom edge to the middle of the character row */
   --guide-min: 280px; /* the guide on the left never gets narrower than this */
-  --align: 170px; /* distance from the page centre to the left edge of the EN button */
-  /* At A+ the boxes shrink to --card-w: 280 + 270 + 50 + 270 = 870px still fits in the 1200px page */
-  padding: 8px 16px 36px;
+  --conn-w: 50px; /* width of the connector between the two boxes */
+  /* At A+ everything shrinks towards its minimum: 280 + 270 + 50 + 270 = 870px still fits */
+  padding: 8px var(--edge) 72px;
   overflow-x: auto; /* very narrow screens: scroll sideways instead of squeezing */
 }
 
 .howto-grid {
   display: grid;
-  /* guide (ends --align left of the page centre, so the card lines up with EN; never below --guide-min)
-     | card | connector | 好 panel (same width as the card) | spare space (can shrink to 0) */
-  /* The two boxes are --box-w wide when there is room, and can shrink to the grid-card
-     width (--card-w) at A+, so everything still fits side by side */
+  /* guide | example card | connector | 好 box.
+     The boxes are --box-w wide (shrinking towards --card-w at A+); the guide takes what is
+     left (at least --guide-min), so the 好 box always ends exactly on the right edge */
   grid-template-columns:
-    max(var(--guide-min), calc(50% - var(--align)))
-    minmax(var(--card-w), var(--box-w)) 50px minmax(var(--card-w), var(--box-w))
-    minmax(0, 1fr);
-  grid-template-rows: auto auto;
-}
-
-/* Row 1: the title, only above the card */
-.howto-title {
-  grid-column: 2;
-  grid-row: 1;
-  font-weight: 400;
-  text-align: center;
-  margin: 0 0 8px;
+    minmax(var(--guide-min), 1fr)
+    minmax(var(--card-w), var(--box-w)) var(--conn-w) minmax(var(--card-w), var(--box-w));
 }
 
 /* In the example card, keep the character row at the bottom,
@@ -301,22 +351,22 @@ main {
   align-content: flex-end;
 }
 
-/* Row 2: everything else, side by side */
+/* Everything side by side, in one row */
 .annotations {
   grid-column: 1;
-  grid-row: 2;
+  grid-row: 1;
 }
 .howto-grid > .card {
   grid-column: 2;
-  grid-row: 2;
+  grid-row: 1;
 }
 .connector {
   grid-column: 3;
-  grid-row: 2;
+  grid-row: 1;
 }
 .hao-card {
   grid-column: 4;
-  grid-row: 2;
+  grid-row: 1;
 }
 
 .annotations {
@@ -476,7 +526,7 @@ main {
 }
 
 .hao-bottom p {
-  font-family: "Fraunces", serif;
+  font-family: "Tinos", serif;
   font-style: italic;
   font-weight: 300;
   font-size: 11px;
@@ -488,7 +538,7 @@ main {
 /* ---------- Filter ---------- */
 
 .filter {
-  padding: 0 16px;
+  padding: 0 var(--edge);
 }
 
 .filter-head {
@@ -504,7 +554,6 @@ main {
 }
 
 .filter-clear {
-  margin-left: auto;
   border: none;
   background: none;
   color: var(--seal);
@@ -517,7 +566,7 @@ main {
 .search-wrap {
   position: relative;
   max-width: 320px;
-  margin: 12px 0 10px;
+  margin: 0 0 12px;
 }
 
 .filter-search {
@@ -585,16 +634,26 @@ main {
   cursor: default;
 }
 
-/* No max-height: all pills always visible, no scrollbar */
+/* No max-height: all pills always visible, no scrollbar.
+   Pills grow a little so every row ends exactly on the right edge (like justified text) */
 .pills {
   display: flex;
   flex-wrap: wrap;
   gap: 4px;
 }
 
+/* An invisible last item that soaks up the space in the LAST row,
+   so the final, shorter row isn't stretched */
+.pills::after {
+  content: "";
+  flex: 1000 1 0;
+}
+
 .pill {
+  flex: 1 0 auto;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 4px;
   padding: 1px 9px;
   font: inherit;
@@ -624,22 +683,23 @@ main {
 
 /* ---------- Footer ---------- */
 
+/* Same left and right edges as the sections above */
 .footer {
-  margin-top: 72px;
+  max-width: var(--content-w);
+  margin: 96px var(--edge) 0;
+  padding: 48px;
   background: #f0eee9;
-  padding: 56px 24px;
+  border-radius: 10px; /* same corners as the cards */
 }
 
 .footer-inner {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 48px;
-  max-width: 820px;
-  margin: 0 auto;
 }
 
 .footer h3 {
-  font-family: "Fraunces", serif;
+  font-family: "Tinos", serif;
   font-weight: 400;
   font-size: 19px;
   margin: 0 0 14px;
@@ -663,12 +723,19 @@ main {
 }
 
 /* One centred line below the coloured footer, on the page background */
+/* Credit lines below the box, on the same left edge */
 .footer-credit {
-  margin: 0;
-  padding: 20px 24px 28px;
+  max-width: var(--content-w);
+  margin: 0 var(--edge);
+  padding: 16px 0 0;
   font-size: 12px;
-  text-align: center;
+  line-height: 1.6;
+  text-align: start; /* left, or right in Arabic */
   opacity: 0.7;
+}
+
+.footer-credit:last-child {
+  padding-bottom: 40px;
 }
 
 .footer-credit a {
@@ -773,7 +840,7 @@ main {
   transform: translateX(-50%);
   z-index: 20;
   padding: 4px 8px;
-  font-family: "Fraunces", serif;
+  font-family: "Tinos", serif;
   font-size: 12px;
   letter-spacing: 0;
   white-space: nowrap;
@@ -783,14 +850,8 @@ main {
   pointer-events: none;
 }
 
-/* ---------- Hint above the cards ---------- */
+/* ---------- Image credit (bottom of the page) ---------- */
 
-.grid-hint {
-  margin: 18px 16px 0;
-  font-family: "Fraunces", serif;
-  font-style: italic;
-  font-weight: 300;
-  font-size: 13px;
-  opacity: 0.65;
-  text-align: center; /* ← add this */
+.image-credit {
+  padding-top: 20px;
 }

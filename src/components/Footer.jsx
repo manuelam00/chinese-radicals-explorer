@@ -7,7 +7,43 @@ const URL = {
   junda: "https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php",
   commons: "https://commons.wikimedia.org/",
   course: "https://www.react-graph-gallery.com/react-d3-dataviz-course",
-  feral: "https://www.feral-worlding.xyz/",
+  huaisu: "https://commons.wikimedia.org/wiki/File:Huaisu_-_Autobiography.jpg",
+};
+
+// Credit for the calligraphy behind the header, one line per language
+const IMAGE_CREDIT = {
+  en: (
+    <>
+      Background image: Song-dynasty colophons (1132), one signed by Zeng Yu
+      (曾紆), on the handscroll <i>Autobiography</i> (自敘帖) attributed to Huaisu
+      (懷素), National Palace Museum, Taipei. Public domain, via{" "}
+      <a href={URL.huaisu}>Wikimedia Commons</a>.
+    </>
+  ),
+  it: (
+    <>
+      Immagine di sfondo: colofoni di epoca Song (1132), tra cui uno firmato da
+      Zeng Yu (曾紆), sul rotolo <i>Autobiografia</i> (自敘帖) attribuito a Huaisu
+      (懷素), Museo nazionale del Palazzo, Taipei. Pubblico dominio, tramite{" "}
+      <a href={URL.huaisu}>Wikimedia Commons</a>.
+    </>
+  ),
+  fr: (
+    <>
+      Image de fond : colophons de l'époque Song (1132), dont un signé par Zeng
+      Yu (曾紆), sur le rouleau <i>Autobiographie</i> (自敘帖) attribué à Huaisu
+      (懷素), Musée national du Palais, Taipei. Domaine public, via{" "}
+      <a href={URL.huaisu}>Wikimedia Commons</a>.
+    </>
+  ),
+  ar: (
+    <>
+      صورة الخلفية: تعليقات ختامية من عهد سونغ (1132)، منها تعليق موقَّع باسم
+      تسنغ يو (曾紆)، على لفافة «السيرة الذاتية» (自敘帖) المنسوبة إلى هوايسو
+      (懷素)، متحف القصر الوطني، تايبيه. ملك عام، عبر{" "}
+      <a href={URL.huaisu}>ويكيميديا كومنز</a>.
+    </>
+  ),
 };
 
 // The footer texts, one block per language.
@@ -45,9 +81,7 @@ const TEXT = {
     learn: [
       <>
         I built this explorer to practice JavaScript and React during{" "}
-        <a href={URL.course}>Yan Holtz's D3 ❤️ React course</a>. For the header,
-        I took inspiration from the new journal{" "}
-        <a href={URL.feral}>Feral Worlding</a>.
+        <a href={URL.course}>Yan Holtz's D3 ❤️ React course</a>.
       </>,
       <>
         I developed the data pipeline and the components with support from
@@ -97,9 +131,7 @@ const TEXT = {
     learn: [
       <>
         Ho costruito questo explorer per esercitarmi con JavaScript e React
-        durante il <a href={URL.course}>corso D3 ❤️ React di Yan Holtz</a>. Per
-        l'intestazione mi sono ispirata alla nuova rivista{" "}
-        <a href={URL.feral}>Feral Worlding</a>.
+        durante il <a href={URL.course}>corso D3 ❤️ React di Yan Holtz</a>.
       </>,
       <>
         Ho sviluppato la pipeline dei dati e i componenti con il supporto di
@@ -151,9 +183,7 @@ const TEXT = {
     learn: [
       <>
         J'ai créé cet explorateur pour m'entraîner à JavaScript et React pendant
-        le <a href={URL.course}>cours D3 ❤️ React de Yan Holtz</a>. Pour
-        l'en-tête, je me suis inspirée de la nouvelle revue{" "}
-        <a href={URL.feral}>Feral Worlding</a>.
+        le <a href={URL.course}>cours D3 ❤️ React de Yan Holtz</a>.
       </>,
       <>
         J'ai développé le pipeline de données et les composants avec l'aide de
@@ -200,8 +230,7 @@ const TEXT = {
     learn: [
       <>
         أنشأتُ هذا المستكشف للتدرّب على JavaScript وReact خلال{" "}
-        <a href={URL.course}>دورة D3 ❤️ React من Yan Holtz</a>. واستلهمتُ تصميم
-        الترويسة من المجلة الجديدة <a href={URL.feral}>Feral Worlding</a>.
+        <a href={URL.course}>دورة D3 ❤️ React من Yan Holtz</a>.
       </>,
       <>
         طوّرتُ مسار معالجة البيانات والمكوّنات بدعم من Claude، الذي استخدمته
@@ -245,6 +274,10 @@ export default function Footer({ lang }) {
           </div>
         </div>
       </footer>
+
+      <p className="footer-credit image-credit" dir={dir}>
+        {IMAGE_CREDIT[lang] ?? IMAGE_CREDIT.en}
+      </p>
 
       <p className="footer-credit" dir={dir}>
         {tx.credit}
