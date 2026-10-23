@@ -399,8 +399,8 @@ main {
   grid-template-rows: var(--card-rows);
   padding: var(--card-pad);
   text-align: center;
-  border: 1px solid var(--seal);
-  background: rgba(250, 248, 244, 0.9);
+  border: 1px solid rgba(176, 53, 43, 0.22); /* seal red at 22% strength */
+  background: #fbf2ef; /* very light red tint */
 }
 
 /* Rows 1 and 2: same sizes as .char and .label in the card */
