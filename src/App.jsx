@@ -114,10 +114,13 @@ export default function App() {
           <p className="kicker">
             部首 · <span dir={dir}>{tx.kicker}</span>
           </p>
-          <h1>
-            The first 100
-            <br />
-            Chinese radicals
+          {/* One <span> per line of the title, from i18n.js */}
+          <h1 dir={dir}>
+            {tx.title.map((line) => (
+              <span key={line} className="title-line">
+                {line}
+              </span>
+            ))}
           </h1>
           <p className="subtitle" dir={dir}>
             {tx.subtitle}

@@ -5,6 +5,8 @@ export const LANGS = ["en", "it", "fr", "ar"];
 
 const UI = {
   en: {
+    // The big title, one string per line (you choose where it breaks)
+    title: ["The first 100", "Chinese", "radicals"],
     kicker: "An interactive explorer",
     subtitle: "and their historical evolution, from oracle bones to brush",
     howTitle: "How to read a card",
@@ -30,6 +32,7 @@ const UI = {
     larger: "Larger text",
   },
   it: {
+    title: ["I primi 100", "radicali", "cinesi"],
     kicker: "Un esploratore interattivo",
     subtitle: "e la loro evoluzione storica, dalle ossa oracolari al pennello",
     howTitle: "Come leggere una scheda",
@@ -55,6 +58,7 @@ const UI = {
     larger: "Testo più grande",
   },
   fr: {
+    title: ["Les 100", "premiers", "radicaux chinois"],
     kicker: "Un explorateur interactif",
     subtitle: "et leur évolution historique, des os oraculaires au pinceau",
     howTitle: "Comment lire une fiche",
@@ -80,6 +84,7 @@ const UI = {
     larger: "Texte plus grand",
   },
   ar: {
+    title: ["أوّل 100", "جذر صيني"],
     kicker: "مستكشف تفاعلي",
     subtitle: "وتطوّرها التاريخي، من عظام العرافة إلى الفرشاة",
     howTitle: "كيف تقرأ البطاقة",

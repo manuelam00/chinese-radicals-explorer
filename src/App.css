@@ -99,13 +99,25 @@ main {
 }
 
 .hero h1 {
-  max-width: 700px; /* "Chinese" and "radicals" on separate lines: three lines, like a poster */
-  font-family: "Tinos", "Noto Serif SC", serif;
+  width: fit-content; /* as wide as its longest line, so it always starts on the left edge */
+  font-family: "Tinos", "Amiri", "Noto Serif SC", serif;
   font-weight: 400; /* Tinos has no light weight */
   font-size: clamp(56px, 11vw, 150px);
   line-height: 0.86;
   letter-spacing: -0.045em;
   margin: 0;
+}
+
+/* Each line of the title on its own line (the line breaks are set in i18n.js) */
+.title-line {
+  display: block;
+}
+
+/* Arabic letters join up: negative letter spacing would break the joins,
+   and the script needs a little more line height */
+.hero h1[dir="rtl"] {
+  letter-spacing: 0;
+  line-height: 1.15;
 }
 
 .subtitle {
