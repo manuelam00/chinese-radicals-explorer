@@ -32,7 +32,9 @@ const TEXT = {
         seal and Liushutong) are public-domain images from{" "}
         <a href={URL.commons}>Wikimedia Commons</a>, found through the Commons
         API and loaded from Commons when the page opens. A dashed box means no
-        form was available.
+        form was available. The stroke-order animations also come from
+        Wikimedia Commons, under their own Creative Commons licenses (recorded
+        in the dataset).
       </>,
       <>
         The Italian, French, and Arabic radical names were generated with Claude
@@ -82,7 +84,9 @@ const TEXT = {
         piccolo sigillo e Liushutong) sono immagini di pubblico dominio tratte
         da <a href={URL.commons}>Wikimedia Commons</a>, trovate tramite l'API di
         Commons e caricate da Commons all'apertura della pagina. Un riquadro
-        tratteggiato indica che non era disponibile alcuna forma.
+        tratteggiato indica che non era disponibile alcuna forma. Anche le
+        animazioni dell'ordine dei tratti provengono da Wikimedia Commons, con
+        le rispettive licenze Creative Commons (registrate nel dataset).
       </>,
       <>
         I nomi dei radicali in italiano, francese e arabo sono stati generati
@@ -133,7 +137,10 @@ const TEXT = {
         ancienne, petit sceau et Liushutong) sont des images du domaine public
         provenant de <a href={URL.commons}>Wikimedia Commons</a>, trouvées via
         l'API de Commons et chargées depuis Commons à l'ouverture de la page. Un
-        cadre en pointillés signifie qu'aucune forme n'était disponible.
+        cadre en pointillés signifie qu'aucune forme n'était disponible. Les
+        animations de l'ordre des traits proviennent aussi de Wikimedia Commons,
+        sous leurs propres licences Creative Commons (enregistrées dans le jeu
+        de données).
       </>,
       <>
         Les noms des radicaux en italien, en français et en arabe ont été
@@ -181,7 +188,8 @@ const TEXT = {
         والختم الصغير، وليوشوتونغ) فهي صور في الملك العام من{" "}
         <a href={URL.commons}>ويكيميديا كومنز</a>، عُثر عليها عبر واجهة برمجة
         تطبيقات كومنز، وتُحمَّل من كومنز عند فتح الصفحة. يعني الإطار المنقّط أنه
-        لا يتوفّر شكل.
+        لا يتوفّر شكل. وتأتي رسوم ترتيب الخطوط المتحركة أيضًا من ويكيميديا
+        كومنز، بتراخيص المشاع الإبداعي الخاصة بكلٍّ منها (المسجّلة في البيانات).
       </>,
       <>
         أُنشئت أسماء الجذور بالإيطالية والفرنسية والعربية بمساعدة Claude، ولم

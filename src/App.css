@@ -6,7 +6,7 @@
   /* Shared by the card AND the "How to read" annotations, so they line up */
   --card-rows: 64px 40px 60px auto;
   --card-pad: 12px;
-  --card-w: 270px;   /* ONE card width, used by the grid AND the How-to section */
+  --card-w: 270px; /* ONE card width, used by the grid AND the How-to section */
 }
 
 main {
@@ -18,7 +18,7 @@ main {
 /* ---------- Header ---------- */
 
 .hero {
-  padding: clamp(32px, 6vw, 72px) 24px 28px;
+  padding: clamp(56px, 9vw, 112px) 24px 28px; /* more white space above the title */
   text-align: center;
 }
 
@@ -37,8 +37,8 @@ main {
 
 .subtitle {
   font-family: "Fraunces", serif;
-  font-style: italic;
-  font-weight: 300;            /* light, now that the real italic is loaded */
+  font-style: normal;
+  font-weight: 300; /* light, now that the real italic is loaded */
   font-size: clamp(16px, 1.8vw, 20px);
   letter-spacing: 0.01em;
   opacity: 0.65;
@@ -104,7 +104,7 @@ main {
 }
 
 .size-ctrl button {
-  display: inline-block;       /* not flex: keeps <sup> raised */
+  display: inline-block; /* not flex: keeps <sup> raised */
   height: 24px;
   padding: 0 10px;
   font-family: "Fraunces", serif;
@@ -116,8 +116,12 @@ main {
   cursor: pointer;
 }
 
-.size-down { font-size: 13px; }
-.size-up { font-size: 14px; } /* same size as the language buttons */
+.size-down {
+  font-size: 13px;
+}
+.size-up {
+  font-size: 14px;
+} /* same size as the language buttons */
 
 .size-ctrl sup {
   font-size: 0.7em;
@@ -127,8 +131,13 @@ main {
   margin-left: 2px;
 }
 
-.size-ctrl button:hover:not(:disabled) { background: #efebe3; }
-.size-ctrl button:disabled { opacity: 0.3; cursor: default; }
+.size-ctrl button:hover:not(:disabled) {
+  background: #efebe3;
+}
+.size-ctrl button:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
 
 /* Four dots = four size levels; the dark one is the current level */
 .size-dots {
@@ -143,7 +152,9 @@ main {
   background: var(--line);
 }
 
-.size-dots i.on { background: var(--ink); }
+.size-dots i.on {
+  background: var(--ink);
+}
 
 .section-title {
   font-family: "Fraunces", serif;
@@ -158,7 +169,7 @@ main {
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, var(--card-w)); /* fixed width */
-  justify-content: center;  /* centre the leftover space */
+  justify-content: center; /* centre the leftover space */
   gap: 12px;
   padding: 16px;
 }
@@ -216,7 +227,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  align-items: center;      /* characters keep their own height, even if the card gets taller */
+  align-items: center; /* characters keep their own height, even if the card gets taller */
   align-content: flex-start;
   gap: 4px 8px;
   font-size: 17px;
@@ -224,14 +235,14 @@ main {
 }
 
 .derived .hl {
-  display: inline-grid;     /* fixed square box, so the outline is a true circle */
+  display: inline-grid; /* fixed square box */
   place-items: center;
   width: 1.25em;
   height: 1.25em;
-  margin: 0 -0.125em;       /* keep the spacing of the other characters */
+  margin: 0 -0.125em; /* keep the spacing of the other characters */
   color: var(--seal);
   outline: 1.5px solid var(--seal);
-  border-radius: 50%;
+  border-radius: 5px; /* slightly rounded square */
 }
 
 /* ---------- How to read ---------- */
@@ -239,18 +250,20 @@ main {
 /* A smaller version of the card, only inside this section:
    CSS variables defined here override the ones in :root for everything inside .howto */
 .howto {
-  --box-w: var(--card-w);  /* example card = same width as the grid cards */
-  --row-mid: 25px;         /* distance from the card's bottom edge to the middle of the character row */
-  --guide-min: 280px;      /* the guide on the left never gets narrower than this */
+  --box-w: var(--card-w); /* example card = same width as the grid cards */
+  --row-mid: 25px; /* distance from the card's bottom edge to the middle of the character row */
+  --guide-min: 280px; /* the guide on the left never gets narrower than this */
   /* 280 + 270 + 50 + 270 = 870px: fits even at A+ (130%) inside the 1200px page */
   padding: 8px 16px 36px;
-  overflow-x: auto;        /* very narrow screens: scroll sideways instead of squeezing */
+  overflow-x: auto; /* very narrow screens: scroll sideways instead of squeezing */
 }
 
 .howto-grid {
   display: grid;
   /* guide (2 shares, at least --guide-min) | card | connector | 好 panel (same width as the card) | spare space (1 share, can shrink to 0) */
-  grid-template-columns: minmax(var(--guide-min), 2fr) var(--box-w) 50px var(--box-w) minmax(0, 1fr);
+  grid-template-columns:
+    minmax(var(--guide-min), 2fr) var(--box-w) 50px var(--box-w)
+    minmax(0, 1fr);
   grid-template-rows: auto auto;
 }
 
@@ -268,14 +281,27 @@ main {
 
 /* In the example card, keep the character row at the bottom,
    so the connector (anchored --row-mid above the bottom) always starts on it */
-.howto .derived { align-content: flex-end; }
+.howto .derived {
+  align-content: flex-end;
+}
 
 /* Row 2: everything else, side by side */
-.annotations { grid-column: 1; grid-row: 2; }
-.howto-grid > .card { grid-column: 2; grid-row: 2; }
-.connector { grid-column: 3; grid-row: 2; }
-.hao-card { grid-column: 4; grid-row: 2; }
-
+.annotations {
+  grid-column: 1;
+  grid-row: 2;
+}
+.howto-grid > .card {
+  grid-column: 2;
+  grid-row: 2;
+}
+.connector {
+  grid-column: 3;
+  grid-row: 2;
+}
+.hao-card {
+  grid-column: 4;
+  grid-row: 2;
+}
 
 .annotations {
   display: grid;
@@ -322,7 +348,9 @@ main {
    Its box runs from the middle of the 好 row (top) to the middle of the
    character row (bottom); the left half draws ─┘ and the right half draws ─ */
 .connector {
-  --hao-mid: calc(1px + var(--card-pad) + 32px); /* border + padding + half of the 64px character row */
+  --hao-mid: calc(
+    1px + var(--card-pad) + 32px
+  ); /* border + padding + half of the 64px character row */
   position: relative;
   align-self: stretch;
   margin: var(--hao-mid) 0 var(--row-mid);
@@ -379,8 +407,15 @@ main {
 }
 
 /* Rows 1 and 2: same sizes as .char and .label in the card */
-.hao-char { font-size: 46px; line-height: 64px; color: var(--seal); }
-.hao-pinyin { font-size: 14px; opacity: 0.8; }
+.hao-char {
+  font-size: 46px;
+  line-height: 64px;
+  color: var(--seal);
+}
+.hao-pinyin {
+  font-size: 14px;
+  opacity: 0.8;
+}
 
 /* Row 3 uses the card's own .forms row, so it needs no extra styles */
 
@@ -399,11 +434,28 @@ main {
   align-items: flex-start;
   gap: 4px;
 }
-.hao-formula span { display: flex; flex-direction: column; align-items: center; }
-.hao-formula b { font-size: 20px; font-weight: 400; }
-.hao-formula b.seal { color: var(--seal); }
-.hao-formula small { font-size: 10px; opacity: 0.7; }
-.hao-formula em { font-style: normal; font-size: 15px; opacity: 0.5; line-height: 28px; }
+.hao-formula span {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.hao-formula b {
+  font-size: 20px;
+  font-weight: 400;
+}
+.hao-formula b.seal {
+  color: var(--seal);
+}
+.hao-formula small {
+  font-size: 10px;
+  opacity: 0.7;
+}
+.hao-formula em {
+  font-style: normal;
+  font-size: 15px;
+  opacity: 0.5;
+  line-height: 28px;
+}
 
 .hao-bottom p {
   font-family: "Fraunces", serif;
@@ -411,7 +463,7 @@ main {
   font-weight: 300;
   font-size: 11px;
   line-height: 1.35;
-  text-align: start;   /* left in EN/IT/FR, right in Arabic */
+  text-align: start; /* left in EN/IT/FR, right in Arabic */
   margin: 0;
 }
 
@@ -493,11 +545,27 @@ main {
   cursor: pointer;
 }
 
-.dropdown li.active { background: #efebe3; }
-.dropdown .dd-check { width: 12px; color: var(--seal); }
-.dropdown .dd-char { width: 22px; font-size: 17px; text-align: center; }
-.dropdown .dd-pinyin { margin-left: auto; font-size: 12px; opacity: 0.5; }
-.dropdown .dd-empty { opacity: 0.6; cursor: default; }
+.dropdown li.active {
+  background: #efebe3;
+}
+.dropdown .dd-check {
+  width: 12px;
+  color: var(--seal);
+}
+.dropdown .dd-char {
+  width: 22px;
+  font-size: 17px;
+  text-align: center;
+}
+.dropdown .dd-pinyin {
+  margin-left: auto;
+  font-size: 12px;
+  opacity: 0.5;
+}
+.dropdown .dd-empty {
+  opacity: 0.6;
+  cursor: default;
+}
 
 /* No max-height: all pills always visible, no scrollbar */
 .pills {
@@ -594,4 +662,117 @@ main {
 .footer-credit a:hover {
   color: var(--seal);
   border-color: var(--seal);
+}
+
+/* ---------- Rounded corners ---------- */
+
+.card,
+.hao-card {
+  border-radius: 10px;
+}
+
+/* ---------- Card hover ---------- */
+
+.grid .card {
+  transition:
+    border-color 0.2s,
+    box-shadow 0.2s,
+    transform 0.2s;
+}
+
+.grid .card:hover {
+  border-color: #bdb5a8;
+  box-shadow: 0 6px 18px rgba(43, 41, 37, 0.08);
+  transform: translateY(-2px);
+}
+
+/* ---------- Stroke-order popup ---------- */
+
+.char-wrap {
+  position: relative; /* the popup is positioned inside this box */
+}
+
+.char-wrap.has-stroke {
+  cursor: help;
+}
+
+.char-wrap:focus-visible {
+  outline: 1px dashed var(--ink);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.stroke-pop {
+  position: absolute;
+  top: -6px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  width: 150px;
+  padding: 10px 10px 6px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  box-shadow: 0 10px 28px rgba(43, 41, 37, 0.16);
+  animation: stroke-pop-in 0.15s ease-out;
+}
+
+.stroke-pop img {
+  width: 128px;
+  height: 128px;
+  object-fit: contain;
+}
+
+.stroke-pop small {
+  font-size: 11px;
+  opacity: 0.6;
+}
+
+@keyframes stroke-pop-in {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) scale(0.96);
+  }
+}
+
+/* ---------- Tooltip on derived characters ---------- */
+/* Pure CSS: shows the text stored in the data-tip attribute while hovering. */
+
+.derived span[data-tip] {
+  position: relative;
+  cursor: default;
+}
+
+.derived span[data-tip]:hover::after {
+  content: attr(data-tip);
+  position: absolute;
+  bottom: calc(100% + 6px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 20;
+  padding: 4px 8px;
+  font-family: "Fraunces", serif;
+  font-size: 12px;
+  letter-spacing: 0;
+  white-space: nowrap;
+  color: var(--paper);
+  background: var(--ink);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+/* ---------- Hint above the cards ---------- */
+
+.grid-hint {
+  margin: 18px 16px 0;
+  font-family: "Fraunces", serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: 13px;
+  opacity: 0.65;
+  text-align: center; /* ← add this */
 }

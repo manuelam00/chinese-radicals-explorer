@@ -121,6 +121,9 @@ export default function App() {
         onChange={setSelected}
         visibleCount={visible.length}
       />
+      <p className="grid-hint" dir={lang === "ar" ? "rtl" : "ltr"}>
+        {t(lang).hoverHint}
+      </p>
       <div className="grid">
         {visible.map((r) => (
           <RadicalCard key={r.id} radical={r} lang={lang} />
