@@ -235,14 +235,25 @@ main {
 }
 
 .derived .hl {
-  display: inline-grid; /* fixed square box */
+  display: inline-grid;
   place-items: center;
   width: 1.25em;
   height: 1.25em;
-  margin: 0 -0.125em; /* keep the spacing of the other characters */
+  margin: 0 -0.125em;
   color: var(--seal);
-  outline: 1.5px solid var(--seal);
-  border-radius: 5px; /* slightly rounded square */
+  z-index: 0; /* a small layer group, so the square below can sit behind 好 but in front of the card */
+}
+
+/* The square is drawn as a separate layer, so it can move without moving 好 */
+.derived .hl::before {
+  content: "";
+  position: absolute;
+  inset: 0 -0.1em -0.2em -0.1em; /* top, right, bottom, left */
+  border: 1.5px solid var(--seal);
+  border-radius: 5px;
+  pointer-events: none;
+  background: #fbf2ef; /* same light red as the 好 box */
+  z-index: -1; /* behind the character */
 }
 
 /* ---------- How to read ---------- */
@@ -250,19 +261,27 @@ main {
 /* A smaller version of the card, only inside this section:
    CSS variables defined here override the ones in :root for everything inside .howto */
 .howto {
-  --box-w: var(--card-w); /* example card = same width as the grid cards */
+  --box-w: 340px; /* the two boxes are wider than the grid cards, so the 好 note fits beside the formula */
+  /* Same rows as the grid cards, but the last row is at least 80px tall:
+     enough for the note in every language, even at A+, so both boxes keep the same height */
+  --card-rows: 64px 40px 60px minmax(80px, auto);
   --row-mid: 25px; /* distance from the card's bottom edge to the middle of the character row */
   --guide-min: 280px; /* the guide on the left never gets narrower than this */
-  /* 280 + 270 + 50 + 270 = 870px: fits even at A+ (130%) inside the 1200px page */
+  --align: 170px; /* distance from the page centre to the left edge of the EN button */
+  /* At A+ the boxes shrink to --card-w: 280 + 270 + 50 + 270 = 870px still fits in the 1200px page */
   padding: 8px 16px 36px;
   overflow-x: auto; /* very narrow screens: scroll sideways instead of squeezing */
 }
 
 .howto-grid {
   display: grid;
-  /* guide (2 shares, at least --guide-min) | card | connector | 好 panel (same width as the card) | spare space (1 share, can shrink to 0) */
+  /* guide (ends --align left of the page centre, so the card lines up with EN; never below --guide-min)
+     | card | connector | 好 panel (same width as the card) | spare space (can shrink to 0) */
+  /* The two boxes are --box-w wide when there is room, and can shrink to the grid-card
+     width (--card-w) at A+, so everything still fits side by side */
   grid-template-columns:
-    minmax(var(--guide-min), 2fr) var(--box-w) 50px var(--box-w)
+    max(var(--guide-min), calc(50% - var(--align)))
+    minmax(var(--card-w), var(--box-w)) 50px minmax(var(--card-w), var(--box-w))
     minmax(0, 1fr);
   grid-template-rows: auto auto;
 }
@@ -307,28 +326,31 @@ main {
   margin: 0;
   list-style: none;
   border: 1px solid transparent; /* same height as the card's border */
-  justify-self: end;
-  width: min(100%, 360px);
+  /* fills its whole column, so the text starts where "Filter radicals" starts */
 }
 
 .annotations li {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
   gap: 10px;
   font-size: 12px;
   line-height: 1.35;
-  text-align: right;
+  text-align: start; /* left in EN/IT/FR, right in Arabic */
   opacity: 0.8;
 }
 
-/* A thin, pale straight line after each label, pointing at its row of the card */
+/* A thin, pale straight line after each label, stretching from the end of the text
+   to the card (at least 32px long), like the leaders in a table of contents */
 .annotations li::after {
   content: "";
-  flex-shrink: 0;
-  width: 32px;
-  border-top: 1px solid var(--ink);
+  flex: 1 0 32px;
+  border-top: 1.5px dotted var(--ink); /* dotted, like the red connector */
   opacity: 0.35;
+}
+
+/* A "\n" in the text (see annForms in i18n.js) starts a new line */
+.annotations li span {
+  white-space: pre-line;
 }
 
 /* The last label sits at the bottom, beside the row of characters:
@@ -351,14 +373,14 @@ main {
   position: relative;
   align-self: stretch;
   margin: var(--hao-mid) 0 var(--row-mid);
-  color: var(--seal);
+  color: rgba(176, 53, 43, 0.5); /* softer seal red, like the 好 box border */
 }
 
 .connector::before,
 .connector::after {
   content: "";
   position: absolute;
-  border: 0 solid currentColor;
+  border: 0 dotted currentColor; /* dotted instead of solid */
 }
 
 /* bottom-left: across from the card, then up */
@@ -367,8 +389,8 @@ main {
   width: 50%;
   top: 0;
   bottom: 0;
-  border-bottom-width: 1px;
-  border-right-width: 1px;
+  border-bottom-width: 1.5px;
+  border-right-width: 1.5px;
 }
 
 /* top-right: across to the 好 box */
@@ -376,19 +398,18 @@ main {
   left: 50%;
   right: 0;
   top: 0;
-  border-top-width: 1px;
+  border-top-width: 1.5px;
 }
 
-/* small arrowhead touching the 好 box */
+/* small solid dot where the line meets the 好 box (instead of an arrowhead) */
 .connector-head {
   position: absolute;
-  right: 1px;
-  top: -3.5px;
-  width: 7px;
-  height: 7px;
-  border-top: 1px solid currentColor;
-  border-right: 1px solid currentColor;
-  transform: rotate(45deg);
+  right: -3px;
+  top: -2.25px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--seal);
 }
 
 /* Same width as the card (column), same height (stretch), and the SAME 4 rows
