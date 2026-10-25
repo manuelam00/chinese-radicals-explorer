@@ -7,6 +7,7 @@ const URL = {
   junda: "https://lingua.mtsu.edu/chinese-computing/statistics/char/list.php",
   commons: "https://commons.wikimedia.org/",
   course: "https://www.react-graph-gallery.com/react-d3-dataviz-course",
+  feral: "https://www.feral-worlding.xyz/",
   huaisu: "https://commons.wikimedia.org/wiki/File:Huaisu_-_Autobiography.jpg",
 };
 
@@ -81,7 +82,9 @@ const TEXT = {
     learn: [
       <>
         I built this explorer to practice JavaScript and React during{" "}
-        <a href={URL.course}>Yan Holtz's D3 ❤️ React course</a>.
+        <a href={URL.course}>Yan Holtz's D3 ❤️ React course</a>. For the header,
+        I took inspiration from the new journal{" "}
+        <a href={URL.feral}>Feral Worlding</a>.
       </>,
       <>
         I developed the data pipeline and the components with support from
@@ -131,7 +134,9 @@ const TEXT = {
     learn: [
       <>
         Ho costruito questo explorer per esercitarmi con JavaScript e React
-        durante il <a href={URL.course}>corso D3 ❤️ React di Yan Holtz</a>.
+        durante il <a href={URL.course}>corso D3 ❤️ React di Yan Holtz</a>. Per
+        l'intestazione mi sono ispirata alla nuova rivista{" "}
+        <a href={URL.feral}>Feral Worlding</a>.
       </>,
       <>
         Ho sviluppato la pipeline dei dati e i componenti con il supporto di
@@ -183,7 +188,9 @@ const TEXT = {
     learn: [
       <>
         J'ai créé cet explorateur pour m'entraîner à JavaScript et React pendant
-        le <a href={URL.course}>cours D3 ❤️ React de Yan Holtz</a>.
+        le <a href={URL.course}>cours D3 ❤️ React de Yan Holtz</a>. Pour
+        l'en-tête, je me suis inspirée de la nouvelle revue{" "}
+        <a href={URL.feral}>Feral Worlding</a>.
       </>,
       <>
         J'ai développé le pipeline de données et les composants avec l'aide de
@@ -230,7 +237,8 @@ const TEXT = {
     learn: [
       <>
         أنشأتُ هذا المستكشف للتدرّب على JavaScript وReact خلال{" "}
-        <a href={URL.course}>دورة D3 ❤️ React من Yan Holtz</a>.
+        <a href={URL.course}>دورة D3 ❤️ React من Yan Holtz</a>. واستلهمتُ تصميم
+        الترويسة من المجلة الجديدة <a href={URL.feral}>Feral Worlding</a>.
       </>,
       <>
         طوّرتُ مسار معالجة البيانات والمكوّنات بدعم من Claude، الذي استخدمته

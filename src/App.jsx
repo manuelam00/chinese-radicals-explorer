@@ -26,6 +26,17 @@ function loadSize() {
   }
 }
 
+// "The first 100" → "The first 1<blurred 0>0": blurs the middle 0 of "100" in any language
+function blurHundred(line) {
+  const i = line.indexOf("100");
+  if (i === -1) return line;
+  return (
+    <>
+      {line.slice(0, i)}1<span className="blur">0</span>0{line.slice(i + 3)}
+    </>
+  );
+}
+
 export default function App() {
   // STATE: values that, when they change, make React re-draw the page
   const [lang, setLang] = useState("en"); // selected language
@@ -118,7 +129,7 @@ export default function App() {
           <h1 dir={dir}>
             {tx.title.map((line) => (
               <span key={line} className="title-line">
-                {line}
+                {blurHundred(line)}
               </span>
             ))}
           </h1>

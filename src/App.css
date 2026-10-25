@@ -100,12 +100,17 @@ main {
 
 .hero h1 {
   width: fit-content; /* as wide as its longest line, so it always starts on the left edge */
-  font-family: "Tinos", "Amiri", "Noto Serif SC", serif;
-  font-weight: 400; /* Tinos has no light weight */
+  font-family: "Fraunces", "Amiri", "Noto Serif SC", serif;
+  font-weight: 300;
   font-size: clamp(56px, 11vw, 150px);
-  line-height: 0.86;
-  letter-spacing: -0.045em;
+  line-height: 0.9;
+  letter-spacing: -0.04em;
   margin: 0;
+}
+
+/* The blurred middle "0" of "100" (inspired by Feral Worlding's header) */
+.hero .blur {
+  filter: blur(3px);
 }
 
 /* Each line of the title on its own line (the line breaks are set in i18n.js) */
@@ -123,7 +128,7 @@ main {
 .subtitle {
   width: fit-content; /* the box is as wide as its text, so it always starts on the left edge (Arabic too) */
   max-width: 640px;
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-style: normal;
   font-weight: 300;
   font-size: clamp(17px, 1.9vw, 24px);
@@ -138,7 +143,7 @@ main {
 }
 
 .langs button {
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-size: 14px;
   letter-spacing: 0.08em;
   padding: 6px 14px;
@@ -169,7 +174,7 @@ main {
   display: inline-block; /* not flex: keeps <sup> raised */
   height: 24px;
   padding: 0 10px;
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   line-height: 24px;
   border: none;
   border-radius: 999px;
@@ -214,13 +219,13 @@ main {
 }
 
 .sec-num {
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-size: 13px;
   color: var(--seal);
 }
 
 .sec-title {
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-weight: 400;
   font-size: 30px;
   letter-spacing: -0.01em;
@@ -230,7 +235,7 @@ main {
 /* Short note on the right end of the heading line (the hover tip) */
 .sec-note {
   margin-left: auto;
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-style: italic;
   font-weight: 300;
   font-size: 13px;
@@ -538,7 +543,7 @@ main {
 }
 
 .hao-bottom p {
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-style: italic;
   font-weight: 300;
   font-size: 11px;
@@ -711,7 +716,7 @@ main {
 }
 
 .footer h3 {
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-weight: 400;
   font-size: 19px;
   margin: 0 0 14px;
@@ -852,7 +857,7 @@ main {
   transform: translateX(-50%);
   z-index: 20;
   padding: 4px 8px;
-  font-family: "Tinos", serif;
+  font-family: "Fraunces", serif;
   font-size: 12px;
   letter-spacing: 0;
   white-space: nowrap;
