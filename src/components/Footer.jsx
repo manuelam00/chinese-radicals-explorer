@@ -16,17 +16,17 @@ const IMAGE_CREDIT = {
   en: (
     <>
       Background image: Song-dynasty colophons (1132), one signed by Zeng Yu
-      (曾紆), on the handscroll <i>Autobiography</i> (自敘帖) attributed to Huaisu
-      (懷素), National Palace Museum, Taipei. Public domain, via{" "}
+      (曾紆), on the handscroll <i>Autobiography</i> (自敘帖) attributed to
+      Huaisu (懷素), National Palace Museum, Taipei. Public domain, via{" "}
       <a href={URL.huaisu}>Wikimedia Commons</a>.
     </>
   ),
   it: (
     <>
       Immagine di sfondo: colofoni di epoca Song (1132), tra cui uno firmato da
-      Zeng Yu (曾紆), sul rotolo <i>Autobiografia</i> (自敘帖) attribuito a Huaisu
-      (懷素), Museo nazionale del Palazzo, Taipei. Pubblico dominio, tramite{" "}
-      <a href={URL.huaisu}>Wikimedia Commons</a>.
+      Zeng Yu (曾紆), sul rotolo <i>Autobiografia</i> (自敘帖) attribuito a
+      Huaisu (懷素), Museo nazionale del Palazzo, Taipei. Pubblico dominio,
+      tramite <a href={URL.huaisu}>Wikimedia Commons</a>.
     </>
   ),
   fr: (
@@ -69,9 +69,9 @@ const TEXT = {
         seal and Liushutong) are public-domain images from{" "}
         <a href={URL.commons}>Wikimedia Commons</a>, found through the Commons
         API and loaded from Commons when the page opens. A dashed box means no
-        form was available. The stroke-order animations also come from
-        Wikimedia Commons, under their own Creative Commons licenses (recorded
-        in the dataset).
+        form was available. The stroke-order animations also come from Wikimedia
+        Commons, under their own Creative Commons licenses (recorded in the
+        dataset).
       </>,
       <>
         The Italian, French, and Arabic radical names were generated with Claude
@@ -96,8 +96,7 @@ const TEXT = {
     ],
     credit: (
       <>
-        Manuela Marolla 2026 for{" "}
-        <a href={URL.course}>react-d3-dataviz-course</a>
+        Manuela M. 2026 for <a href={URL.course}>react-d3-dataviz-course</a>
       </>
     ),
   },
@@ -148,8 +147,7 @@ const TEXT = {
     ],
     credit: (
       <>
-        Manuela Marolla 2026 per{" "}
-        <a href={URL.course}>react-d3-dataviz-course</a>
+        Manuela M. 2026 per <a href={URL.course}>react-d3-dataviz-course</a>
       </>
     ),
   },
@@ -202,8 +200,7 @@ const TEXT = {
     ],
     credit: (
       <>
-        Manuela Marolla 2026 pour{" "}
-        <a href={URL.course}>react-d3-dataviz-course</a>
+        Manuela M. 2026 pour <a href={URL.course}>react-d3-dataviz-course</a>
       </>
     ),
   },
@@ -250,8 +247,7 @@ const TEXT = {
     ],
     credit: (
       <>
-        Manuela Marolla، 2026، لدورة{" "}
-        <a href={URL.course}>react-d3-dataviz-course</a>
+        Manuela M.، 2026، لدورة <a href={URL.course}>react-d3-dataviz-course</a>
       </>
     ),
   },
